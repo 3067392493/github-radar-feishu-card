@@ -46,3 +46,30 @@ github-radar-feishu-card/
 ## 许可
 
 MIT
+
+## 附带的脚本（可直接跑）
+
+仓库里带两个能直接用起来的脚本：
+
+- `github-radar.js`：调 GitHub 官方 API，抓最近三天新建、Stars ≥ 50 且 Forks ≥ 5 的仓库，
+  再用本地 Ollama（qwen2）写中文介绍，输出 `雷达草稿.json` 和 `雷达草稿.md`。
+- `push.js`：把 `雷达草稿.json` 转成飞书交互式卡片发送；加 `--dry-run` 只打印不发。
+
+前提：
+
+1. 本机装好 Node.js 与 Ollama，并执行 `ollama pull qwen2`
+2. 在自己的飞书自建应用里准备 `config.json`（字段参考 `config.example.json`）
+3. 应用要有机器人能力，以及 `im:message:send_as_bot` 权限
+4. 先让机器人收到你的一条消息，`你的open_id.txt` 才会有值（脚本取它第一行作为接收人）
+
+用法：
+
+```bash
+node github-radar.js
+node push.js --dry-run
+node push.js
+```
+
+实测结果（2026-11-13）：一轮抓取 9 个仓库，卡片成功送达飞书私聊。
+
+注意：`config.json` 与 `你的open_id.txt` 是私有配置，已在 `.gitignore` 中排除，不要提交。

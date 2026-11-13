@@ -1,0 +1,6 @@
+{
+  "appId": "cli_你的应用ID填这里",
+  "appSecret": "你的应用密钥填这里",
+  "ollamaUrl": "http://127.0.0.1:11434",
+  "model": "qwen2:latest"
+}
